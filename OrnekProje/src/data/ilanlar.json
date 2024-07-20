@@ -1,0 +1,19 @@
+{
+  "ilanlar": [
+    {
+      "id": "1",
+      "baslik": "",
+      "aciklama": "",
+      "fiyat": ""
+    },
+    {
+      "id": "2",
+      "ilanBaslik": "asd",
+      "ilanAciklama": "asd",
+      "ilanFiyat": "123",
+      "ilanResmi": "",
+      "ilanKategorisi": "Kiralık",
+      "ilanDaireTipi": "Villa"
+    }
+  ]
+}

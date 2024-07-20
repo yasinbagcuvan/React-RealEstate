@@ -1,0 +1,39 @@
+{
+  "kategoriler": [
+    {
+      "id": "0",
+      "kategoriAdi": "Seçiniz"
+    },
+    {
+      "id": "1",
+      "kategoriAdi": "Satılık"
+    },
+    {
+      "id": "2",
+      "kategoriAdi": "Kiralık"
+    },
+    {
+      "id": "3",
+      "kategoriAdi": "Turizm Amaçlı Kiralık"
+    },
+    {
+      "id": "4",
+      "kategoriAdi": "Devren Satılık Konut"
+    }
+  ],
+  "daireTipi": [
+    {
+      "id": "1",
+      "daireTipi": "Daire"
+    },
+    {
+      "id": "2",
+      "daireTipi": "Villa"
+    },
+    {
+      "id": "3",
+      "daireTipi": "Apartman"
+    }
+  ]
+  
+}
