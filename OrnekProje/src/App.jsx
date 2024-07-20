@@ -9,6 +9,10 @@ import Ilan from './components/Ilan';
 import Forms from './components/Forms';
 import { useContext } from 'react';
 import DataContext from './context/DataContext';
+import PrivateRoute from './services/PrivateRoute';
+import LoginPage from './components/LoginPage';
+import { AuthProvider } from './context/AuthContext';
+import Ilanlarim from './components/Ilanlarim';
 
 
 function App() {
@@ -17,19 +21,24 @@ function App() {
   const navHead = "Real Estate"
   const {state} = useContext(DataContext)
   return (
-
-    <BrowserRouter>
+<AuthProvider>
+<BrowserRouter>
       <Navi title={navHead} /> {/* Navi bileşenini her sayfada göstermek için burada yer alır */}
       <Routes>
-        <Route path="/" element={<Anasayfa />} />
+      <Route path='/' element={<Anasayfa/>}>
+            <Route path="forms" element={<PrivateRoute element={<Forms/>}/>}/>
+            <Route path="forms/:ilanId" element={<PrivateRoute element={<Forms/>}/>}/>
+            <Route path="ilanlarim" element={<PrivateRoute element={<Ilanlarim/>}/>}/>
+        </Route>
+        <Route path='/login' element={<LoginPage/>} />
         <Route path="/ilanlar" element={<Ilanlar />} />
         <Route path="/ilan/:ilanId" element={<IlanDetay />} /> {/* Dinamik parametre */}
         <Route path="/ilan" element={<Ilan />} />
-        <Route path={"/forms"} element={<Forms />} />
-        <Route path={"/forms/:ilanId"} element={<Forms />} />
       </Routes>
       <ToastContainer />
     </BrowserRouter>
+</AuthProvider>
+    
   )
 }
 export default App

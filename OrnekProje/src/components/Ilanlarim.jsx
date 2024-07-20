@@ -1,13 +1,11 @@
 import React, { useContext } from 'react'
 import DataContext from '../context/DataContext'
-import varsayilanResim from '../assets/img/house.png'
 import { MdDeleteForever, MdEdit } from 'react-icons/md';
 import { Link } from 'react-router-dom';
-import '../assets/style/ilanlar.scss'
 import AuthContext from '../context/AuthContext';
 
-const Ilan = ({ilan}) => {
-  const{state,ilanlariGetir} = useContext(DataContext,AuthContext);
+const Ilanlarim = ({ilan}) => {
+    const{ilanSil,kartDuzenle,state,ilanlariGetir,currentUser} = useContext(DataContext,AuthContext);
 
   return (
     ((ilan.ilanBaslik.toLowerCase().startsWith(state.search.toLowerCase())) ||
@@ -22,12 +20,14 @@ const Ilan = ({ilan}) => {
           <p className='ilan-fiyat'>{ilan.ilanFiyat}$</p>
         </div>
         <div className='buttons'>
-        
+        {currentUser &&
+      <a  onClick={()=>ilanSil(ilan.id)} className='bn30'><MdDeleteForever size={20} /></a>}
       <Link  className='bn30' to={`/ilan/${ilan.id}`} onClick={()=> ilanlariGetir()}>DETAY</Link>
-     
+      {currentUser &&
+      <Link className='bn30' to={`/forms/${ilan.id}`} onClick={()=> kartDuzenle(ilan.id)}><MdEdit size={20} /></Link>}
       </div>
     </div>
   )
 }
 
-export default Ilan
+export default Ilanlarim

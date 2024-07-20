@@ -1,0 +1,43 @@
+.login-page{
+    background: linear-gradient(rgba(0, 0, 0, 0.432),black),url('../img/bg-real-estate.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    position: relative;
+ 
+    
+    .head{
+        position: absolute;
+        color: white;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        h3{
+            font-weight: bold;
+            font-family: monospace;
+            font-size: 20px;
+            
+        }
+    }
+    form{
+        background-color: #e9c56aa2;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        font-size: 25px;
+        a{
+            text-decoration: none;
+            font-weight: bold;
+            color: rgba(255, 0, 0, 0.562);
+        }
+        input{
+            font-size: 20px;
+        }
+    }
+    
+}
+#root,html,body{
+    height: 100%;
+}

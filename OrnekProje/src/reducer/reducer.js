@@ -6,17 +6,21 @@ export const initialState ={
     ilanResmi:"",
     ilanKategorisi:"Kategori Seçiniz",
     ilanDaireTipi:"",
+    ilanKisi:"",
     kategoriler:[],
     daireTipi:[],
     secilenKategori:"Tüm Ilanlar",
     secilenDaireTipi:"Tümünü Göster",
     secilenIlan:"",
-    search:""
+    search:"",
+    isAuthenticated:false
 
 }
 
 export const reducer = (state, action) => {
     switch (action.type) {
+        case "ilanKisi":
+            return { ...state, ilanKisi: action.payload };
         case "ilanBaslik":
             return { ...state, ilanBaslik: action.payload };
         case "ilanAciklama":
@@ -77,6 +81,26 @@ export const reducer = (state, action) => {
             }
         case "search":
             return { ...state, search: action.payload };
+        case"setAuthenticated":
+            return{
+                ...state,
+                isAuthenticated:action.payload
+            }
+        case"currentUser":
+            return{
+                ...state,
+                currentUser:action.payload
+            }
+        case"user":
+            return{
+                ...state,
+                user:action.payload
+            }
+        case"password":
+            return{
+                ...state,
+                password:action.payload
+            }
     }
 };
 

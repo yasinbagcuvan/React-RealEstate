@@ -2,11 +2,12 @@ import React, { useContext, useEffect } from 'react';
 import '../assets/style/forms.scss';
 import DataContext from '../context/DataContext';
 import {  useParams } from 'react-router-dom';
+import AuthContext from '../context/AuthContext';
 
 const Forms = () => {
   const { ilanId } = useParams();
-  const { handleSubmit, state, dispatch,kartDuzenle } = useContext(DataContext);
-  const { secilenIlan, ilanKategorisi, ilanBaslik, ilanAciklama, ilanResmi, ilanFiyat, ilanDaireTipi, kategoriler, daireTipi, ilanlar } = state;
+  const { handleSubmit, state, dispatch,kartDuzenle } = useContext(DataContext,AuthContext);
+  const { secilenIlan, ilanKategorisi, ilanBaslik, ilanAciklama, ilanResmi, ilanFiyat, ilanDaireTipi, kategoriler, daireTipi, ilanlar,currentUser,ilanKisi } = state;
 
   const isFormValid = ilanBaslik !== "" && ilanAciklama !== "" && ilanFiyat !== "" && ilanKategorisi !== "Seçiniz" && ilanDaireTipi !== "";
 
@@ -37,6 +38,7 @@ const Forms = () => {
   return (
     
     <form onSubmit={handleSubmit}>
+      {currentUser && dispatch({type:"ilanKisi", payload: currentUser.id})}
       <h3>{secilenIlan ? "Ev Düzenle" : "Ev Ekle"}</h3>
       <input
         value={secilenIlan ? secilenIlan.ilanBaslik : ilanBaslik}
