@@ -7,7 +7,7 @@ const Ilanlar = () => {
   return (
     <div className='ilan-list'>{
       state.ilanlar.map(ilan =>
-        (ilan.ilanKategorisi === state.secilenIlan || state.secilen === "Tüm Ilanlar") && (!kitap.isDeleted && 
+        (ilan.ilanKategorisi === state.secilenKategori || state.secilenKategori === "Tüm Ilanlar") && (!ilan.isDeleted && 
           <Ilan ilan={ilan} key={ilan.id}/>)
       )
       }

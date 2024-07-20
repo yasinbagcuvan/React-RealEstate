@@ -1,44 +1,90 @@
-import React, { useContext, useState } from 'react'
-import '../assets/style/forms.scss'
-import DataContext from '../context/DataContext'
+import React, { useContext, useEffect } from 'react';
+import '../assets/style/forms.scss';
+import DataContext from '../context/DataContext';
+import {  useParams } from 'react-router-dom';
 
 const Forms = () => {
-
-  const{handleSubmit,state,dispatch} = useContext(DataContext)
-
-  const{secilenIlan,ilanKategorisi,ilanBaslik,ilanAciklama,ilanResmi,ilanFiyat,ilanDaireTipi,kategoriler,daireTipi} = state
+  const { ilanId } = useParams();
+  const { handleSubmit, state, dispatch,kartDuzenle } = useContext(DataContext);
+  const { secilenIlan, ilanKategorisi, ilanBaslik, ilanAciklama, ilanResmi, ilanFiyat, ilanDaireTipi, kategoriler, daireTipi, ilanlar } = state;
 
   const isFormValid = ilanBaslik !== "" && ilanAciklama !== "" && ilanFiyat !== "" && ilanKategorisi !== "Seçiniz" && ilanDaireTipi !== "";
 
+  useEffect(() => {
+    if (ilanId) {
+        kartDuzenle(ilanId)    
+        {console.log(secilenIlan)}  
+    }
+    else{
+      dispatch({type:"resetForm"})
+    }
+    return () => {
+      dispatch({ type: "resetSecilenIlan" });
+    };
+  }, [ilanId, ilanlar,dispatch]);
+
+
+
+  const handleInputChange = (e, type) => {
+    dispatch({ type, payload: e.target.value });
+  };
+
+  if (ilanId && !secilenIlan) {
+    return dispatch({type:"resetForm"})
+  }
 
   return (
-    <>
-    <form onSubmit={handleSubmit}>
-        <h3>{"Ev Ekle"}</h3>
-        <input value={ilanBaslik} onChange={e=>dispatch({type:"ilanBaslik",payload:e.target.value})} type='text' placeholder='İlan Başlığı' />
-        <input value={ilanAciklama} onChange={e=>dispatch({type:"ilanAciklama",payload:e.target.value})} type='text' placeholder='İlan Açıklama' />
-        <input value={ilanFiyat} onChange={e=>dispatch({type:"ilanFiyat",payload:e.target.value})} type='number' placeholder='İlan Fiyat' />
-        <select  value={ilanKategorisi} onChange={e=>dispatch({type:"ilanKategorisi",payload:e.target.value})} >
-        {kategoriler.map(kategori =>
-            <option key={kategori.id}>{kategori.kategoriAdi} </option>
-          )}
-        </select>
-          
-        <select  value={ilanDaireTipi} onChange={e=>dispatch({type:"ilanDaireTipi",payload:e.target.value})} >
-          {daireTipi.map(daireTipi =>
-            <option key={daireTipi.id}>{daireTipi.daireTipi} </option>
-          )}
-        </select>
-        <input value={ilanResmi} onChange={e=>dispatch({type:"ilanResmi",payload:e.target.value})} type="url" placeholder='Image(url)' />
-        <input
-                disabled={!isFormValid}
-                type="submit"
-                value={secilenIlan ? "Duzenle" : "Ekle"}
-        />
-    </form>
-    </>
     
-  )
-}
+    <form onSubmit={handleSubmit}>
+      
+      <h3>{secilenIlan ? "Ev Düzenle" : "Ev Ekle"}</h3>
+      <input
+        value={secilenIlan ? secilenIlan.ilanBaslik : ilanBaslik}
+        onChange={e => handleInputChange(e, "ilanBaslik")}
+        type='text'
+        placeholder='İlan Başlığı'
+      />
+      <input
+        value={secilenIlan ? secilenIlan.ilanAciklama : ilanAciklama}
+        onChange={e => handleInputChange(e, "ilanAciklama")}
+        type='text'
+        placeholder='İlan Açıklama'
+      />
+      <input
+        value={secilenIlan ? secilenIlan.ilanFiyat : ilanFiyat}
+        onChange={e => handleInputChange(e, "ilanFiyat")}
+        type='number'
+        placeholder='İlan Fiyat'
+      />
+      <select
+        value={secilenIlan ? secilenIlan.ilanKategorisi : ilanKategorisi}
+        onChange={e => handleInputChange(e, "ilanKategorisi")}
+      >
+        {kategoriler.map(kategori =>
+          <option key={kategori.id}>{kategori.kategoriAdi}</option>
+        )}
+      </select>
+      <select
+        value={secilenIlan ? secilenIlan.ilanDaireTipi : ilanDaireTipi}
+        onChange={e => handleInputChange(e, "ilanDaireTipi")}
+      >
+        {daireTipi.map(dt =>
+          <option key={dt.id}>{dt.daireTipi}</option>
+        )}
+      </select>
+      <input
+        value={secilenIlan ? secilenIlan.ilanResmi : ilanResmi}
+        onChange={e => handleInputChange(e, "ilanResmi")}
+        type="url"
+        placeholder='Image(url)'
+      />
+      <input
+        disabled={!isFormValid}
+        type="submit"
+        value={secilenIlan ? "Düzenle" : "Ekle"}
+      />
+    </form>
+  );
+};
 
-export default Forms
+export default Forms;

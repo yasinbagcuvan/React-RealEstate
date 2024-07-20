@@ -65,6 +65,11 @@ export const reducer = (state, action) => {
                 ilanDaireTipi: editCard.ilanDaireTipi,
                 ilanKategorisi:editCard.ilanKategorisi
             }
+        case "resetSecilenIlan":
+            return{
+                ...state,
+                secilenIlan:""
+            }
         case "search":
             return { ...state, search: action.payload };
         default:

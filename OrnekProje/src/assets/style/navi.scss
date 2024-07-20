@@ -20,15 +20,47 @@ nav{
         display: flex;
         align-items: center;
         gap: 25px;
+        
         li{
+            a{
+                text-decoration: none;
+                font-size: large;
+                font-weight: bold;
+            }
             transition: .5s;
             cursor: pointer;
             &:hover{
                 color:#E76F51;
                 text-decoration: underline;
-                transform: scale(1.2);  
+                transform: scale(1.3);  
             }
         }
+    }
+
+    .search{
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+        justify-content: end;
+        position: relative;
+        input{
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 1px solid grey;
+            background-color: rgb(195, 248, 203);
+            color: black;
+            
+        }
+        input:focus{
+            outline: 2px solid #2F3645;
+    
+        }
+    }
+    .searchIcon{
+        position:absolute;
+        color: rgb(17, 0, 255);
     }
 }
 

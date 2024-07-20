@@ -1,19 +1,23 @@
 {
   "ilanlar": [
     {
-      "id": "1",
-      "baslik": "",
-      "aciklama": "",
-      "fiyat": ""
-    },
-    {
       "id": "2",
       "ilanBaslik": "asd",
       "ilanAciklama": "asd",
       "ilanFiyat": "123",
       "ilanResmi": "",
       "ilanKategorisi": "Kiralık",
-      "ilanDaireTipi": "Villa"
+      "ilanDaireTipi": "Villa",
+      "isDeleted": true
+    },
+    {
+      "id": "3",
+      "ilanBaslik": "Tamamı Kiralık FULL APARTMA",
+      "ilanAciklama": "Evin konumu çok güzel denize sıfır",
+      "ilanFiyat": "555.555",
+      "ilanResmi": "",
+      "ilanKategorisi": "Turizm Amaçlı Kiralık",
+      "ilanDaireTipi": "Apartman"
     }
   ]
 }

@@ -85,8 +85,8 @@ export const DataProvider = ({children}) =>  {
       dispatch({type:"daireTipleriGetir",payload:daireTipleri})
     }
 
-    const ilanDuzenle =  (id) => {
-        dispatch({type:"ilanDuzenle",id})
+    const kartDuzenle =  (id) => {
+        dispatch({type:"kartDuzenle",id})
       }
 
     const handleSubmit = (e) => {
@@ -110,7 +110,7 @@ export const DataProvider = ({children}) =>  {
       },[])
 
       return <DataContext.Provider value={{
-        handleSubmit,ilanSil,ilanDuzenle,state,dispatch
+        handleSubmit,ilanSil,kartDuzenle,state,dispatch,ilanlariGetir
 
       }}>
             {children}

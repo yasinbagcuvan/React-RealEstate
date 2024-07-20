@@ -1,5 +1,5 @@
 .ilan{
-    width: 420px;
+    width: 320px;
     background-color: #c9c7c3;
     color: #2F3645;
     display: flex;
@@ -10,12 +10,13 @@
     border: 1px solid #2F3645;
     box-shadow: 1px 1px 10px #ff5006;
     margin-top: 20px;
+    margin: 20px 10px 0px 10px;
     img{
         width: 50%;
         height: 50%;
         object-fit: cover;
         border-radius: 10px 10px; 
-        margin-top: 15px;
+        margin: 15px;
         transition: 1s;
         &:hover{
             transform: scale(1.2);
@@ -24,20 +25,61 @@
     }
     &-body{
         padding: 5px;
+        width: 200px;
         h4{
             text-align: center;
-            font-size: 15px;
+            font-size: 20px;
             font-weight: bold;
+            margin: 10px;
+        }
+        p{
+            text-align: center;
+            margin: 0;
+            font-size: 15px;
+        }
+        .ilan-fiyat{
+            text-align: end;
+            font-size: 20px;
+            font-weight: bolder;
+            margin-top: 0;
+            color: crimson;
         }
     }
     .buttons{
         align-items: center;
         justify-content: space-between;
-        gap: 50px;
+        gap: 10px;
         display: flex;
-        margin: auto;
+        margin: 5px auto;
         
     }
+    .ilan-kategori{
+            max-width: 150px;
+            text-align: center;
+            position: absolute;
+            font-size: 20px;
+            color: #ffffff;
+            top: -20px;
+            left: -0px;
+            object-fit: contain;
+            background-image: linear-gradient(45deg, #ff510673, #dfaee0);
+            border: rgba(255, 0, 0, 0.308) 1px solid;
+            border-radius: 15px;
+
+
+        
+        }
+    .ilan-daireTipi{
+        position: absolute;
+        font-size: 20px;
+        color: #ffffff;
+        top: -20px;
+        right: -0px;
+        background-image: linear-gradient(45deg, #ff5006, #dfaee0);
+            border: red 1px solid;
+            border-radius: 15px;
+    }
+
     
 }
 .delete,.edit{
@@ -76,11 +118,14 @@
     }
 }
 
-.card-list{
+.ilan-list{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 15px;
+}
+a{
+    position: relative;
 }
 .bn30 {
     border: 5em;

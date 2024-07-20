@@ -1,18 +1,21 @@
-import React, { useContext } from 'react'
+import React, { useContext , useEffect} from 'react'
 import DataContext from '../context/DataContext'
 import { useParams } from 'react-router-dom'
 
 const IlanDetay = () => {
-    const{state} = useContext(DataContext)
+    const{state,ilanlariGetir} = useContext(DataContext)
     const params = useParams();
     const param = params.ilanId
-  return (
-    <div>
+    const {ilanlar} = state
+
+    return (
+      <div>
+        {console.log(ilanlar)}
         <div className="detay">
-        <img src={state.ilanlar[param-1].ilanResmi} alt="" />
-        <h3>{state.ilanlar[param-1].ilanBaslik}</h3>
-        <p>{state.ilanlar[param-1].ilanAciklama}</p>
-        <p>{state.ilanlar[param-1].ilanFiyat}</p>
+        <img src={ilanlar[param].ilanResmi} alt="" />
+        <h3>{ilanlar[param].ilanBaslik}</h3>
+        <p>{ilanlar[param].ilanAciklama}</p>
+        <p>{ilanlar[param].ilanFiyat}</p>
         </div>
     </div>
   )
