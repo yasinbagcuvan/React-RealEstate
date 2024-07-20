@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import '../assets/style/ilanlar.scss'
 
 const Ilan = ({ilan}) => {
-  const{ilanSil,kartDuzenle,state} = useContext(DataContext);
+  const{ilanSil,kartDuzenle,state,ilanlariGetir} = useContext(DataContext);
 
   return (
     ((ilan.ilanBaslik.toLowerCase().startsWith(state.search.toLowerCase())) ||
@@ -22,7 +22,7 @@ const Ilan = ({ilan}) => {
         </div>
         <div className='buttons'>
       <a  onClick={()=>ilanSil(ilan.id)} className='bn30'><MdDeleteForever size={20} /></a>
-      <Link  className='bn30' to={`/ilan/${ilan.id}`}>DETAY</Link>
+      <Link  className='bn30' to={`/ilan/${ilan.id}`} onClick={()=> ilanlariGetir()}>DETAY</Link>
       <Link className='bn30' to={`/forms/${ilan.id}`} onClick={()=> kartDuzenle(ilan.id)}><MdEdit size={20} /></Link>
       </div>
     </div>

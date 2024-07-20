@@ -10,7 +10,10 @@ import Forms from './components/Forms';
 import { useContext } from 'react';
 import DataContext from './context/DataContext';
 
+
 function App() {
+
+
   const navHead = "Real Estate"
   const {state} = useContext(DataContext)
   return (

@@ -10,6 +10,7 @@ const Forms = () => {
 
   const isFormValid = ilanBaslik !== "" && ilanAciklama !== "" && ilanFiyat !== "" && ilanKategorisi !== "Seçiniz" && ilanDaireTipi !== "";
 
+
   useEffect(() => {
     if (ilanId) {
         kartDuzenle(ilanId)    
@@ -36,19 +37,20 @@ const Forms = () => {
   return (
     
     <form onSubmit={handleSubmit}>
-      
       <h3>{secilenIlan ? "Ev Düzenle" : "Ev Ekle"}</h3>
       <input
         value={secilenIlan ? secilenIlan.ilanBaslik : ilanBaslik}
         onChange={e => handleInputChange(e, "ilanBaslik")}
         type='text'
         placeholder='İlan Başlığı'
+        maxLength={45}
       />
       <input
         value={secilenIlan ? secilenIlan.ilanAciklama : ilanAciklama}
         onChange={e => handleInputChange(e, "ilanAciklama")}
         type='text'
         placeholder='İlan Açıklama'
+        maxLength={500}
       />
       <input
         value={secilenIlan ? secilenIlan.ilanFiyat : ilanFiyat}

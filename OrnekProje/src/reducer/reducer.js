@@ -41,6 +41,11 @@ export const reducer = (state, action) => {
                     return{...ilan}
                 }
             })]
+            return{
+                ...state,
+                ilanlar:duzenleIlan,
+                secilenIlan:""
+            }
             return { ...state, secilenIlan: action.payload };
         case "ilanSil":
             const guncelİlanlar1 = [...state.ilanlar.filter(ilan => ilan.id !== action.id)]
@@ -72,8 +77,6 @@ export const reducer = (state, action) => {
             }
         case "search":
             return { ...state, search: action.payload };
-        default:
-            return state;
     }
 };
 

@@ -111,7 +111,6 @@ export const DataProvider = ({children}) =>  {
 
       return <DataContext.Provider value={{
         handleSubmit,ilanSil,kartDuzenle,state,dispatch,ilanlariGetir
-
       }}>
             {children}
       </DataContext.Provider>
