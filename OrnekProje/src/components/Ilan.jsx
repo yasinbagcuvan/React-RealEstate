@@ -7,7 +7,7 @@ import '../assets/style/ilanlar.scss'
 import AuthContext from '../context/AuthContext';
 
 const Ilan = ({ilan}) => {
-  const{state,ilanlariGetir} = useContext(DataContext,AuthContext);
+  const{state,ilanlariGetir} = useContext(DataContext);
 
   return (
     ((ilan.ilanBaslik.toLowerCase().startsWith(state.search.toLowerCase())) ||

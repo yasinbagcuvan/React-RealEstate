@@ -13,14 +13,15 @@ export const initialState ={
     secilenDaireTipi:"Tümünü Göster",
     secilenIlan:"",
     search:"",
-    isAuthenticated:false
+    isAuthenticated:false,
+    currentUser:{},
 
 }
 
 export const reducer = (state, action) => {
     switch (action.type) {
         case "ilanKisi":
-            return { ...state, ilanKisi: action.payload };
+            return { ...state, ilanKisi: action.payload};
         case "ilanBaslik":
             return { ...state, ilanBaslik: action.payload };
         case "ilanAciklama":
@@ -81,26 +82,6 @@ export const reducer = (state, action) => {
             }
         case "search":
             return { ...state, search: action.payload };
-        case"setAuthenticated":
-            return{
-                ...state,
-                isAuthenticated:action.payload
-            }
-        case"currentUser":
-            return{
-                ...state,
-                currentUser:action.payload
-            }
-        case"user":
-            return{
-                ...state,
-                user:action.payload
-            }
-        case"password":
-            return{
-                ...state,
-                password:action.payload
-            }
+        }
     }
-};
 

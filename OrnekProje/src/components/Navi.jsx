@@ -7,9 +7,9 @@ import { IoMdSearch } from 'react-icons/io';
 import AuthContext from '../context/AuthContext';
 const Navi = () => {
 
-  const {state,logout,getCurrentUser} = useContext(AuthContext);
+  const {authState,logout,getCurrentUser} = useContext(AuthContext);
   const {dispatch} = useContext(DataContext);
-  const{isAuthenticated,currentUser,ilanlar} = state
+  const{isAuthenticated,currentUser} = authState
   const navigate = useNavigate();
 
   const handleLogin = () =>{
@@ -18,6 +18,8 @@ const Navi = () => {
   const handleLogout = () =>{
     {logout()}
     navigate("/login");
+    dispatch({type:"logOut"})
+    dispatch({type:"ilanKisi",payload: ""})
   }
 
   const handleAdd = (e) =>{
@@ -41,7 +43,7 @@ const Navi = () => {
     if(JSON.parse(localStorage.getItem("user"))){
       getCurrentUser()
     }
-  },[])
+  },[isAuthenticated])
   return (
     <nav>
     <div className="brand">
@@ -51,8 +53,8 @@ const Navi = () => {
     <ul className="liste">
             <li><NavLink to="/">Anasayfa</NavLink></li>
             <li><NavLink to={"ilanlar"}>Tüm ilanlar</NavLink></li>
-            {currentUser && <li><NavLink to={"forms"}>İlan Ekle</NavLink></li>}
-            {currentUser && <li><NavLink to={"ilanlarim"}>İlanlarım</NavLink></li>}
+            {currentUser && <li><NavLink to={"/forms"}>İlan Ekle</NavLink></li>}
+            {currentUser && <li><NavLink to={"/ilanlarim"}>İlanlarım</NavLink></li>}
             
     </ul>
     <div className='search'>

@@ -6,14 +6,11 @@ import '../assets/style/detay.scss'
 const IlanDetay = () => {
     const{state} = useContext(DataContext)
     const {ilanId} = useParams();
-    const {ilanlar,ilanlariGetir} = state
-    const [ilan, setIlan] = useState(null);
+    const {ilanlar} = state
 
-    useEffect(() => {
-      {ilanlariGetir}
-    }, []);
 
     return (
+      ilanlar.length !==0 &&
       <>
         <div className="detay-container">
           <div className="detay-resim">
@@ -27,8 +24,6 @@ const IlanDetay = () => {
             <p><strong>Kategori:</strong> {ilanlar[ilanId-1].ilanKategorisi}</p>
             <p><strong>Fiyat:</strong> {ilanlar[ilanId-1].ilanFiyat}$</p>
             </div>
-           
-
           </div>
         </div>
     </>

@@ -8,7 +8,7 @@ import IlanDetay from './components/IlanDetay';
 import Ilan from './components/Ilan';
 import Forms from './components/Forms';
 import { useContext } from 'react';
-import DataContext from './context/DataContext';
+import DataContext, { DataProvider } from './context/DataContext';
 import PrivateRoute from './services/PrivateRoute';
 import LoginPage from './components/LoginPage';
 import { AuthProvider } from './context/AuthContext';
@@ -19,9 +19,8 @@ function App() {
 
 
   const navHead = "Real Estate"
-  const {state} = useContext(DataContext)
   return (
-<AuthProvider>
+<DataProvider>
 <BrowserRouter>
       <Navi title={navHead} /> {/* Navi bileşenini her sayfada göstermek için burada yer alır */}
       <Routes>
@@ -37,7 +36,7 @@ function App() {
       </Routes>
       <ToastContainer />
     </BrowserRouter>
-</AuthProvider>
+</DataProvider>
     
   )
 }

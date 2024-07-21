@@ -6,16 +6,18 @@ import AuthContext from '../context/AuthContext';
 
 const Forms = () => {
   const { ilanId } = useParams();
-  const { handleSubmit, state, dispatch,kartDuzenle } = useContext(DataContext,AuthContext);
-  const { secilenIlan, ilanKategorisi, ilanBaslik, ilanAciklama, ilanResmi, ilanFiyat, ilanDaireTipi, kategoriler, daireTipi, ilanlar,currentUser,ilanKisi } = state;
+  const { handleSubmit, state, dispatch,kartDuzenle } = useContext(DataContext);
+  const {  authState,getCurrentUser } = useContext(AuthContext);
+  const { secilenIlan, ilanKategorisi, ilanBaslik, ilanAciklama, ilanResmi, ilanFiyat, ilanDaireTipi, kategoriler, daireTipi, ilanlar,ilanKisi } = state;
+  const {currentUser,isAuthenticated} = authState
 
   const isFormValid = ilanBaslik !== "" && ilanAciklama !== "" && ilanFiyat !== "" && ilanKategorisi !== "Seçiniz" && ilanDaireTipi !== "";
 
-
   useEffect(() => {
+    {dispatch({type:"ilanKisi", payload: currentUser.id})} 
     if (ilanId) {
         kartDuzenle(ilanId)    
-        {console.log(secilenIlan)}  
+       
     }
     else{
       dispatch({type:"resetForm"})
@@ -36,9 +38,8 @@ const Forms = () => {
   }
 
   return (
-    
+   
     <form onSubmit={handleSubmit}>
-      {currentUser && dispatch({type:"ilanKisi", payload: currentUser.id})}
       <h3>{secilenIlan ? "Ev Düzenle" : "Ev Ekle"}</h3>
       <input
         value={secilenIlan ? secilenIlan.ilanBaslik : ilanBaslik}
@@ -87,6 +88,7 @@ const Forms = () => {
         type="submit"
         value={secilenIlan ? "Düzenle" : "Ekle"}
       />
+
     </form>
   );
 };

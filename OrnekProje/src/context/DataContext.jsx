@@ -1,16 +1,18 @@
-import { createContext, useEffect, useReducer } from "react";
+import { createContext,  useContext,  useEffect, useReducer } from "react";
 import { initialState, reducer } from "../reducer/reducer";
 import { toast, Zoom } from "react-toastify";
 import axios from "axios";
+import AuthContext from "./AuthContext";
 
 const DataContext = createContext();
 
 export const DataProvider = ({children}) =>  {
 
     const [state,dispatch] = useReducer(reducer,initialState)
-
-    const{secilenIlan,ilanBaslik,ilanAciklama,ilanResmi,ilanDaireTipi,ilanKategorisi,ilanFiyat,ilanlar} = state
-
+    const{authState} = useContext(AuthContext)
+    const {currentUser} = authState
+  
+    const{secilenIlan,ilanBaslik,ilanAciklama,ilanResmi,ilanDaireTipi,ilanKategorisi,ilanFiyat,ilanlar, ilanKisi} = state
     const ilanEkle = async(yeni) =>{
         let url = "http://localhost:3005/ilanlar";
         if(!secilenIlan) {
@@ -70,6 +72,8 @@ export const DataProvider = ({children}) =>  {
         const response = await axios.get(url)
         const ilanlar = await response.data;
         dispatch({type:"ilanlariGetir",payload:ilanlar})
+        dispatch({type:"ilanKisi"})
+        console.log(ilanKisi);
     }
 
     const kategorileriGetir = async ()=>{
@@ -91,6 +95,7 @@ export const DataProvider = ({children}) =>  {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        {currentUser &&   dispatch({type:"ilanKisi", payload:currentUser.id})}
         ilanEkle({
           id: (Number(ilanlar[ilanlar.length-1].id)+1).toString(),
           ilanBaslik: ilanBaslik,
@@ -98,15 +103,17 @@ export const DataProvider = ({children}) =>  {
           ilanFiyat: ilanFiyat,
           ilanResmi: ilanResmi,
           ilanKategorisi: ilanKategorisi,
-          ilanDaireTipi: ilanDaireTipi
+          ilanDaireTipi: ilanDaireTipi,
+          ilanKisi : ilanKisi
         });
         dispatch({type:"resetForm"})
       }
 
       useEffect(()=>{
         kategorileriGetir();
+        
         ilanlariGetir();
-        daireTipleriGetir();
+        daireTipleriGetir(); 
       },[])
 
       return <DataContext.Provider value={{

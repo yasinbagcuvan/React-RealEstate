@@ -1,14 +1,13 @@
-import { createContext, useReducer, useState } from "react";
+import { createContext, useContext, useEffect, useReducer, useState } from "react";
 import AuthService from "../services/AuthService";
-import { initialState, reducer } from "../reducer/reducer";
+import { authInitialState, authReducer } from "../reducer/reducer1.js"
 import axios from "axios";
-import { toast, Zoom } from "react-toastify";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({children})=>{
-    const[state,dispatch] = useReducer(reducer,initialState);
-    const{isAuthenticated} = state;
+    const[authState,authDispatch] = useReducer(authReducer,authInitialState);
+    const{isAuthenticated} = authState;
 
 
     const getCurrentUser = async()=> {
@@ -20,29 +19,41 @@ export const AuthProvider = ({children})=>{
         });
         const user = await response.data;
         console.log(user);
-        if (isAuthenticated) {
-            dispatch({ type: "currentUser", payload:user });
+        if(user){
+            authDispatch({type:"setAuthenticated",payload:true})
+            if (isAuthenticated) {
+                authDispatch({ type: "currentUser", payload:user });
+            }
+            // else{
+            //    logout();
+            // }
+          }
         }
         
-      }
 
     const login1 = async(username,password) =>{
         try {
             const response = await AuthService.login(username,password);
             if(response.access_token){
-                dispatch({type:"setAuthenticated",payload:JSON.parse(localStorage.getItem("user"))})
+                authDispatch({type:"setAuthenticated",payload:JSON.parse(localStorage.getItem("user"))})
             }
         } catch (error) {
-            dispatch({type:"setAuthenticated",payload:false})
+            authDispatch({type:"setAuthenticated",payload:false})
             throw new Error(error)
         }
     }
 
     const logout = () =>{
         AuthService.logout();
-        dispatch({type:"setAuthenticated",payload:false})
+        authDispatch({type:"setAuthenticated",payload:false})
+        authDispatch({type:"logOut"})
     }
-    return <AuthContext.Provider value={{logout,state,dispatch,getCurrentUser,login1}}>
+
+    // useEffect(() => {
+    //     getCurrentUser();
+    // }, []);
+
+    return <AuthContext.Provider value={{logout,authState,authDispatch,getCurrentUser,login1}}>
         {children}
     </AuthContext.Provider>
 }
