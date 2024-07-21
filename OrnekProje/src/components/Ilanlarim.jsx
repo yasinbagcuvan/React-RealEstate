@@ -29,9 +29,11 @@ const Ilanlarim = ({}) => {
   //   return null;
   // }
   return (
+
     filteredIlanlar.map(ilan  =>
       ((ilan.ilanBaslik.toLowerCase().startsWith(state.search.toLowerCase())) ||
     (ilan.ilanAciklama.toLowerCase().startsWith(state.search.toLowerCase()))) &&
+
         <div className='ilan' key={ilan.id}>
           <p className='ilan-kategori'>{ilan.ilanKategorisi}</p>
           <p className='ilan-daireTipi'>{ilan.ilanDaireTipi}</p>
