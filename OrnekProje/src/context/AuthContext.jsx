@@ -1,7 +1,8 @@
-import { createContext, useContext, useEffect, useReducer, useState } from "react";
+import { createContext, useReducer } from "react";
 import AuthService from "../services/AuthService";
 import { authInitialState, authReducer } from "../reducer/reducer1.js"
 import axios from "axios";
+import { toast, Zoom } from "react-toastify";
 
 const AuthContext = createContext();
 
@@ -11,14 +12,14 @@ export const AuthProvider = ({children})=>{
 
 
     const getCurrentUser = async()=> {
-        const url = "https://api.escuelajs.co/api/v1/auth/profile";
+        const token = JSON.parse(localStorage.getItem("user"))?.token;
+        const url = "https://localhost:7083/api/Auth/profile";
         const response = await axios.get(url,{
           headers:{
-            "Authorization":`Bearer ${JSON.parse(localStorage.getItem("user")).access_token}`
+            "Authorization":`Bearer ${token}`
           }
         });
         const user = await response.data;
-        console.log(user);
         if(user){
             authDispatch({type:"setAuthenticated",payload:true})
             if (isAuthenticated) {
@@ -29,18 +30,60 @@ export const AuthProvider = ({children})=>{
             // }
           }
         }
+
+        const getIlanUser = async (id) => {
+            const url = `https://localhost:7083/api/Auth/getUser?userId=${id}`;
+            try {
+                const response = await axios.get(url, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                const user = response.data;
+                if (user) {
+                    authDispatch({ type: "ilanKisiFullName", payload: user.fullName });
+                    authDispatch({ type: "ilanKisiTel", payload: user.phoneNumber });
+                    authDispatch({ type: "ilanKisiMail", payload: user.normalizedEmail });
+                    authDispatch({ type: "ilanKisiFoto", payload: user.profilePictureUrl });
+                }
+            } catch (error) {
+                console.error('Kullanıcı bilgileri getirilemedi:', error);
+            }
+        };
         
 
     const login1 = async(username,password) =>{
         try {
             const response = await AuthService.login(username,password);
-            if(response.access_token){
-                authDispatch({type:"setAuthenticated",payload:JSON.parse(localStorage.getItem("user"))})
+            if(response.token){
+                authDispatch({type:"setAuthenticated",payload:true})
             }
         } catch (error) {
             authDispatch({type:"setAuthenticated",payload:false})
             throw new Error(error)
         }
+    }
+
+    const register = async(yeni) =>{
+        const url = "https://localhost:7083/api/Auth/register";
+        const response = await axios.post(url,yeni, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        toast.success('Kayıt Başarılı! Hoşgeldiniz!', {
+            position: "bottom-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            transition: Zoom,
+            });
+            authDispatch({type:"resetRegisterForm"})
+        return response.data;
     }
 
     const logout = () =>{
@@ -53,7 +96,7 @@ export const AuthProvider = ({children})=>{
     //     getCurrentUser();
     // }, []);
 
-    return <AuthContext.Provider value={{logout,authState,authDispatch,getCurrentUser,login1}}>
+    return <AuthContext.Provider value={{logout,authState,authDispatch,getCurrentUser,login1,register,getIlanUser}}>
         {children}
     </AuthContext.Provider>
 }

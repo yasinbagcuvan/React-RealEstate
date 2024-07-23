@@ -51,7 +51,6 @@ export const reducer = (state, action) => {
                 ilanlar:duzenleIlan,
                 secilenIlan:""
             }
-            return { ...state, secilenIlan: action.payload };
         case "ilanSil":
             const guncelİlanlar1 = [...state.ilanlar.filter(ilan => ilan.id !== action.id)]
             return { ...state, ilanlar: guncelİlanlar1};

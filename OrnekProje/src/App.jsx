@@ -13,6 +13,7 @@ import PrivateRoute from './services/PrivateRoute';
 import LoginPage from './components/LoginPage';
 import { AuthProvider } from './context/AuthContext';
 import Ilanlarim from './components/Ilanlarim';
+import RegisterPage from './components/RegisterPage';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
             <Route path="ilanlarim" element={<PrivateRoute element={<Ilanlarim/>}/>}/>
         </Route>
         <Route path='/login' element={<LoginPage/>} />
+        <Route path='/register' element={<RegisterPage/>}/>
         <Route path="/ilanlar" element={<Ilanlar />} />
         <Route path="/ilan/:ilanId" element={<IlanDetay />} /> {/* Dinamik parametre */}
         <Route path="/ilan" element={<Ilan />} />

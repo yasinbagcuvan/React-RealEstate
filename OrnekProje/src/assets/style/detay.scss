@@ -47,4 +47,32 @@
   .detay-ozellikler strong {
     color: #333;
   }
-  
+  .ilan-sahibi {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ilan-sahibi-foto {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+}
+
+.ilan-sahibi-bilgiler {
+    text-align: left;
+}
+
+.ilan-sahibi-bilgiler p {
+    margin: 5px 0;
+}
+
+.ilan-sahibi-bilgiler strong {
+    color: #333;
+}

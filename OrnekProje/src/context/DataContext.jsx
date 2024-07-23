@@ -14,9 +14,9 @@ export const DataProvider = ({children}) =>  {
   
     const{secilenIlan,ilanBaslik,ilanAciklama,ilanResmi,ilanDaireTipi,ilanKategorisi,ilanFiyat,ilanlar, ilanKisi} = state
     const ilanEkle = async(yeni) =>{
-        let url = "http://localhost:3005/ilanlar";
+       let url = "https://localhost:7083/api/ilanlar"
         if(!secilenIlan) {
-            yeni.id = (Number(ilanlar[ilanlar.length-1].id)+1).toString()
+            // yeni.id = (Number(ilanlar[ilanlar.length-1].id)+1).toString()
             dispatch({type:"ilanEkle",yeni})
             toast.success('Yeni İlan Başarıyla Eklendi!', {
                 position: "bottom-right",
@@ -48,6 +48,7 @@ export const DataProvider = ({children}) =>  {
                 transition: Zoom,
                 });
         }
+        return dispatch({type:"resetForm"})
     }
 
     const ilanSil = async(id) => {
@@ -63,17 +64,17 @@ export const DataProvider = ({children}) =>  {
             theme: "colored",
             transition: Zoom,
             });
-        const url =`http://localhost:3005/ilanlar/${id}`
+        const url =`https://localhost:7083/api/ilanlar/${id}`
         const response = await axios.patch(url,{isDeleted:true})
     }
 
     const ilanlariGetir = async () =>{
-        let url ="http://localhost:3005/ilanlar"
+        let url ="https://localhost:7083/api/ilanlar"
         const response = await axios.get(url)
         const ilanlar = await response.data;
         dispatch({type:"ilanlariGetir",payload:ilanlar})
         dispatch({type:"ilanKisi"})
-        console.log(ilanKisi);
+        
     }
 
     const kategorileriGetir = async ()=>{
@@ -97,7 +98,7 @@ export const DataProvider = ({children}) =>  {
         e.preventDefault();
         {currentUser &&   dispatch({type:"ilanKisi", payload:currentUser.id})}
         ilanEkle({
-          id: (Number(ilanlar[ilanlar.length-1].id)+1).toString(),
+          //id: (Number(ilanlar[ilanlar.length-1].id)+1).toString(),
           ilanBaslik: ilanBaslik,
           ilanAciklama: ilanAciklama,
           ilanFiyat: ilanFiyat,
@@ -111,7 +112,6 @@ export const DataProvider = ({children}) =>  {
 
       useEffect(()=>{
         kategorileriGetir();
-        
         ilanlariGetir();
         daireTipleriGetir(); 
       },[])

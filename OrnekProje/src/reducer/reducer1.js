@@ -3,6 +3,15 @@ export const authInitialState ={
     currentUser:{},
     user:"",
     password:"",
+    email:"",
+    fullName:"",
+    profilePictureUrl:"",
+    phoneNumber:"",
+    ilanKisiFullName:"",
+    ilanKisiTel:"",
+    ilanKisiFoto:"",
+    ilanKisiMail:"",
+
 
 }
 
@@ -28,10 +37,60 @@ export const authReducer = (state, action) => {
                 ...state,
                 password:action.payload
             }
+        case"email":
+            return{
+                ...state,
+                email:action.payload
+            }
+        case"fullName":
+            return{
+                ...state,
+                fullName:action.payload
+            }
+        case"phoneNumber":
+            return{
+                ...state,
+                phoneNumber:action.payload
+            }
+        case"profilePictureUrl":
+            return{
+                ...state,
+                profilePictureUrl:action.payload
+            }
+        case"ilanKisiFullName":
+            return{
+                ...state,
+                ilanKisiFullName:action.payload
+            }
+        case"ilanKisiTel":
+            return{
+                ...state,
+                ilanKisiTel:action.payload
+            }
+        case"ilanKisiFoto":
+            return{
+                ...state,
+                ilanKisiFoto:action.payload
+            }
+        case"ilanKisiMail":
+            return{
+                ...state,
+                ilanKisiMail:action.payload
+            }
         case"logOut":
             return{
                 ...state,
                 currentUser:"",
+            }
+        case"resetRegisterForm":
+            return{
+                ...state,
+                user:"",
+                password:"",
+                email:"",
+                fullName:"",
+                profilePictureUrl:"",
+                phoneNumber:""
             }
     }
 };

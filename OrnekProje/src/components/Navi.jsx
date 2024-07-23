@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import Brand from '../assets/img/house.png'
 import '../assets/style/navi.scss'  
 import DataContext from '../context/DataContext';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { IoMdSearch } from 'react-icons/io';
 import AuthContext from '../context/AuthContext';
 const Navi = () => {
@@ -11,7 +11,7 @@ const Navi = () => {
   const {dispatch} = useContext(DataContext);
   const{isAuthenticated,currentUser} = authState
   const navigate = useNavigate();
-
+  
   const handleLogin = () =>{
     navigate("/login")
   }
@@ -20,6 +20,10 @@ const Navi = () => {
     navigate("/login");
     dispatch({type:"logOut"})
     dispatch({type:"ilanKisi",payload: ""})
+  }
+
+  const handleRegister = () =>{
+    navigate('/register')
   }
 
   const handleAdd = (e) =>{
@@ -64,13 +68,16 @@ const Navi = () => {
     <div className="kullanici">
               {currentUser &&
                 <div className="card-kullanici">
-                  <img src={currentUser.avatar}/>
+                  <img src={currentUser.profilePictureUrl}/>
                     <div className="user-text">
-                      <span>{currentUser.email} / {currentUser.role}</span>
+                      <span>{currentUser.email} / {currentUser.fullName}</span>
                     </div>
                 </div>
             }
             <button onClick={isAuthenticated?handleLogout:handleLogin}>{isAuthenticated?"Logout":"Login"}</button>
+            {!isAuthenticated && 
+              <button onClick={handleRegister}>Üye Ol</button>
+            }
       </div>
 </nav>
   )

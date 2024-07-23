@@ -7,7 +7,7 @@ import AuthContext from '../context/AuthContext'
 const Ilanlar = () => {
   const {state} = useContext(DataContext)
   const {authState} = useContext(AuthContext)
-
+  console.log(state.ilanlar);
   return (
     <>
     <div className='ilan-list'>{

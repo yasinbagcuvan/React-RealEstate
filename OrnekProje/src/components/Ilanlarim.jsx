@@ -9,14 +9,14 @@ import '../assets/style/ilanlar.scss'
 const Ilanlarim = ({}) => {
     const{ilanSil,kartDuzenle,state,ilanlariGetir} = useContext(DataContext);
     const{authState,getCurrentUser} = useContext(AuthContext);
-    const {currentUser,isAuthenticated} = authState
-    const{ilanKisi,ilanlar} = state
+    const {currentUser} = authState
     
     const filteredIlanlar = state.ilanlar.filter(item => item.ilanKisi === authState.currentUser.id && !item.isDeleted )
 
     useEffect(() =>{
       if(JSON.parse(localStorage.getItem("user"))){
         getCurrentUser()
+        ilanlariGetir()
        console.log(filteredIlanlar);
       }
     },[])
