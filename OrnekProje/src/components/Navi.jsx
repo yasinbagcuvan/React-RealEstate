@@ -43,6 +43,9 @@ const Navi = () => {
       }
   }
 
+
+
+
   useEffect(() =>{
     if(JSON.parse(localStorage.getItem("user"))){
       getCurrentUser()
@@ -66,11 +69,11 @@ const Navi = () => {
             <NavLink to={"/ilanlar"} className='searchIcon'><IoMdSearch size={30} />  </NavLink> 
     </div>
     <div className="kullanici">
-              {currentUser &&
+              {isAuthenticated &&
                 <div className="card-kullanici">
                   <img src={currentUser.profilePictureUrl}/>
                     <div className="user-text">
-                      <span>{currentUser.email} / {currentUser.fullName}</span>
+                       <span>{currentUser.email} / {currentUser.fullName}</span>
                     </div>
                 </div>
             }
