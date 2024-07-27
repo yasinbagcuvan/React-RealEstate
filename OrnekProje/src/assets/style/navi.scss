@@ -1,5 +1,5 @@
 nav{
-    background-color: #36BA98;
+    background-color: #405D72;
     color:white;
     display: flex;
     justify-content: space-between;
@@ -26,11 +26,12 @@ nav{
                 text-decoration: none;
                 font-size: large;
                 font-weight: bold;
+                color: #ffffff;
             }
             transition: .5s;
             cursor: pointer;
             &:hover{
-                color:#E76F51;
+                color:#758694;
                 text-decoration: underline;
                 transform: scale(1.3);  
             }
@@ -45,23 +46,25 @@ nav{
         padding: 20px;
         justify-content: end;
         position: relative;
-        input{
+        .search-text{
             padding: 5px 10px;
             border-radius: 5px;
-            border: 1px solid grey;
-            background-color: rgb(195, 248, 203);
-            color: black;
-            
+            border: 1px solid rgb(255, 255, 255);
+            background-color: rgb(122, 122, 122);
+           
         }
         input:focus{
             outline: 2px solid #2F3645;
     
         }
+        ::placeholder{
+            color: white;
+        }
     }
     .searchIcon{
         position:absolute;
-        top: 30px;
-        color: rgb(17, 0, 255);
+        top: 34px;
+        color: rgb(0, 0, 0);
     }
     .kullanici{
         display: flex;

@@ -65,7 +65,7 @@ const Navi = () => {
             
     </ul>
     <div className='search'>
-            <input onChange={(e)=>dispatch({type:"search",payload:e.target.value})} type='text' placeholder='Search..'  /> 
+            <input className='search-text' style={{color:"red"}} onChange={(e)=>dispatch({type:"search",payload:e.target.value})} type='text' placeholder='Search..'  /> 
             <NavLink to={"/ilanlar"} className='searchIcon'><IoMdSearch size={30} />  </NavLink> 
     </div>
     <div className="kullanici">
